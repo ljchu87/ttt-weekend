@@ -1,66 +1,32 @@
 /*----------------------- Constants --------------------------------*/
 
+const winningCombos = [[0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],[1, 4, 7],[2, 5, 8],[0, 4, 8],[2, 4, 6]];
 
 
 /*--------------------- Variables (state) ----------------------------*/
-
-////Step 1 - Define the required variables used to track the state of the game
-
-  //// 1a) Use a variable named `board` to represent the state of the squares on the board.
-
-  //// 1b) Use a variable named `turn` to track whose turn it is.
-
-  //// 1c) Use a variable named `winner` to represent if anyone has won yet, or if a tie has occurred.
 let board, turn, winner
+
 
 /*------------------ Cached Element References ------------------------*/
 
-//// Step 2 - Store cached element references
-//// 2a) In a constant called `squareEls`, store the nine elements representing the squares on the page.
-const squareEls = document.querySelector(".board > div")
-//// 2b) In a constant called `messageEl`, store the element that displays the game's status on the page.
+const squareEls = document.querySelectorAll(".board > div")
 const messageEl = document.querySelector("#message")
+const boardEl = document.querySelector(".board")
 
 /*----------------------- Event Listeners -----------------------------*/
 
-
+boardEl.addEventListener("click", handleClick)
 
 /*-------------------------- Functions --------------------------------*/
 
-// Step 3 - Upon loading, the game state should be initialized, and a function should be called to render this game state
-
-  // 3a) Create a function called `init`.
-  // 3b) Call this `init` function when the app loads.
-  // 3c) Set the `board` variable to an array containing nine `null`s to 
-  //    represent empty squares.
-  
-  // 3d) Set the `turn` to `1` - which will represent player X.
-  
-  // 3e) Set the `winner` to `null`.
-  
-  // 3f) Call a function called `render` at the end of the `init` function.
 function init (){
   const board = [null,null,null,null,null,null,null,null,null]
+  console.log(board)
   let turn = 1
   let winner = null
   render()
 }
 
-// Step 4 - The state of the game should be rendered to the user
-  // 4a) Create a function called `render`.
-  // 4b) Loop over `board` and for each element:
-  //     - Use the current index of the iteration to access the corresponding 
-  //       square in the `squareEls` array.
-  //     - Style that square however you wish, dependent on the value  
-  //       contained in the current cell being iterated over (`-1`, `1`, or
-  //       `null`).  
-  
-  // 4c) Render a message based on the current game state:
-  //     - If winner has a value of `null` (meaning the game is still in
-  //       progress), render whose turn it is.
-  //     - If `winner` is equal to `'T'` (tie), render a tie message.
-  //     - Otherwise, render a congratulatory message to the player that has 
-  //       won.
 function render(){
   board.forEach(function(square, idx){
     if (winner === nul){
@@ -75,31 +41,86 @@ function render(){
   })
 }
 
+function handleClick(evt){
+  let sqIdx = parseInt(evt.target.id[2])
+  if (winner === 1 || winner === -1) {
+    rerturn
+  }
+  if (board[sqIdx]) {
+    return
+  }
+  board[sqIdx] = turn
+  turn *= -1
+
+  winner = getWinner()
+  render()
+}
 
 
-// Step 5 - Define the required constants
 
-  // 5a) In a constant called `winningCombos` define the eight possible winning 
-  //     combinations as an array of arrays.
+////Step 1 - Define the required variables used to track the state of the game
 
-// Step 6 - Handle a player clicking a square with a `handleClick` function
+//// 1a) Use a variable named `board` to represent the state of the squares on the board.
 
-  // 6a) Create a function called `handleClick`. It will have an `evt`
-  //     parameter.
+//// 1b) Use a variable named `turn` to track whose turn it is.
 
-  // 6b) Attach an event listener to the game board (you can do this to each
-  //     one of the existing `squareEls` OR add a new cached element reference
-  //     that will allow you to take advantage of event bubbling). On the
-  //     `'click'` event, it should call the `handleClick` function
-  //     you created in 6a.
+//// 1c) Use a variable named `winner` to represent if anyone has won yet, or if a tie has occurred.
 
-  // 6c) Obtain the index of the square that was clicked by "extracting" the 
-  //     index from an `id` assigned to the element in the HTML. Assign this  
-  //     to a constant called `sqIdx`.
+//// Step 2 - Store cached element references
+//// 2a) In a constant called `squareEls`, store the nine elements representing the squares on the page.
+//// 2b) In a constant called `messageEl`, store the element that displays the game's status on the page.
+//// Step 3 - Upon loading, the game state should be initialized, and a function should be called to render this game state
+
+//// 3a) Create a function called `init`.
+//// 3b) Call this `init` function when the app loads.
+//// 3c) Set the `board` variable to an array containing nine `null`s to 
+////    represent empty squares.
+
+//// 3d) Set the `turn` to `1` - which will represent player X.
+
+//// 3e) Set the `winner` to `null`.
+
+//// 3f) Call a function called `render` at the end of the `init` function.
+
+//// Step 4 - The state of the game should be rendered to the user
+//// 4a) Create a function called `render`.
+//// 4b) Loop over `board` and for each element:
+////     - Use the current index of the iteration to access the corresponding 
+////       square in the `squareEls` array.
+////     - Style that square however you wish, dependent on the value  
+////       contained in the current cell being iterated over (`-1`, `1`, or
+////       `null`).  
+
+//// 4c) Render a message based on the current game state:
+////     - If winner has a value of `null` (meaning the game is still in
+////       progress), render whose turn it is.
+////     - If `winner` is equal to `'T'` (tie), render a tie message.
+////     - Otherwise, render a congratulatory message to the player that has 
+////       won.
+//// Step 5 - Define the required constants
+
+//// 5a) In a constant called `winningCombos` define the eight possible winning 
+////     combinations as an array of arrays.
+//// Step 6 - Handle a player clicking a square with a `handleClick` function
+
+//// 6a) Create a function called `handleClick`. It will have an `evt`
+////     parameter.
+
+  //// 6b) Attach an event listener to the game board (you can do this to each
+  ////     one of the existing `squareEls` OR add a new cached element reference
+  ////     that will allow you to take advantage of event bubbling). On the
+  ////     `'click'` event, it should call the `handleClick` function
+  ////     you created in 6a.
+
+  //// 6c) Obtain the index of the square that was clicked by "extracting" the 
+  ////     index from an `id` assigned to the element in the HTML. Assign this  
+  ////     to a constant called `sqIdx`.
 
   // 6d) If the `board` has a value at the `sqIdx`, immediately `return`  
   //     because that square is already taken. Also, if `winner` is not `null`
   //     immediately `return` because the game is over.
+
+  // 69-2) we are only creating a return statement for two events: one is if the winner value is 1(X) or -1(0), we will return nothing. The other event is if there is a value in the sqIdx (other player can't access the square and override the value) ex: [1, null, null, null, null, null null, null]
 
   // 6e) Update the `board` array at the `sqIdx` with the current value of
   //     `turn`.
