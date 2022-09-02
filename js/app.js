@@ -6,16 +6,17 @@ const winningCombos = [[0, 1, 2],[3, 4, 5],[6, 7, 8],[0, 3, 6],[1, 4, 7],[2, 5, 
 /*--------------------- Variables (state) ----------------------------*/
 let board, turn, winner
 
-
 /*------------------ Cached Element References ------------------------*/
 
 const squareEls = document.querySelectorAll(".board > div")
 const messageEl = document.querySelector("#message")
 const boardEl = document.querySelector(".board")
+const resetBtnEl = document.querySelector("#reset-button")
 
 /*----------------------- Event Listeners -----------------------------*/
 
 boardEl.addEventListener("click", handleClick)
+resetBtnEl.addEventListener("click", init)
 
 /*-------------------------- Functions --------------------------------*/
 init()
@@ -54,7 +55,7 @@ function render(){
 
 function handleClick(evt){
   let sqIdx = parseInt(evt.target.id[2])
-  if (winner === 1 || winner === -1) {
+  if (winner === 1 || winner === -1 || winner === "T") {
     return
   }
   if (board[sqIdx]) {
@@ -84,9 +85,8 @@ function getWinner(){
   
   if (winnerCombo === true) {
       return turn * -1
-  } else if (!board.some((value)=> value === null)){
+  } else if (!board.some((value) => value === null)){
     return "T"
   }
   return null
 }
-
