@@ -16,9 +16,10 @@ section.board {
   grid-template-rows: repeat(3, 10vmin);
   grid-template-columns: repeat(3, 10vmin);
   grid-gap: 0vmin;
-  margin: auto;
-  padding: 0 20px;
-  margin: 40px 40px 425px 425px;
+  /* margin: auto; */
+  top: 10%;
+  /* padding: 0 20px; */
+  /* margin: 40px 40px 425px 425px; */
 }
 
 div {
@@ -37,7 +38,7 @@ div {
   color: white;
   font-weight: bold;
   font-size: 15px;
-  margin: auto;
+  margin: 20px;
 }
 
 #reset-button:hover {
