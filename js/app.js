@@ -36,6 +36,7 @@ function render(){
     }else {
       squareEls[idx].textContent = ""
     }
+  
   })
   if (winner === null){
     if (turn === 1){
@@ -71,12 +72,8 @@ function handleClick(evt){
 function getWinner(){
   let bestCombo = []
   winningCombos.forEach(function(combo){
-    // [0,1,2]
-    // let comboValue = 0
     let comboValue = board[combo[0]] + board[combo[1]] + board[combo[2]]
-    // combo.forEach(function(position){
-    //   comboValue += board[position]
-    // })
+  
     bestCombo.push(Math.abs(comboValue))
   })
   let winnerCombo = bestCombo.some(function(val){
