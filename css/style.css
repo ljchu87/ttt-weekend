@@ -16,10 +16,7 @@ section.board {
   grid-template-rows: repeat(3, 10vmin);
   grid-template-columns: repeat(3, 10vmin);
   grid-gap: 0vmin;
-  /* margin: auto; */
   top: 10%;
-  /* padding: 0 20px; */
-  /* margin: 40px 40px 425px 425px; */
 }
 
 div {
